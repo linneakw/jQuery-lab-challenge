@@ -11,7 +11,7 @@ $(function() {
 	generateButtons();
 
 	// Grab all the buttons.
-	var buttons = $(':button');
+	var buttons = $(':button'); // is : the syntax for accessing a variable?
 
 	// Apply the same function and effect to each button.
 	buttons.click(function() {
@@ -25,6 +25,9 @@ $(function() {
 // Hint: apply default styling to all buttons, and then apply only 'active' (btn-danger)
 // styling to the selected button.
 function setButtonStyle(selectedButton, buttons) {
+    // if the button is selected, then the style is btn-danger
+    buttons.attr('class', 'btn btn-primary');
+    selectedButton.attr('class', 'btn btn-danger');
 
 }
 
@@ -36,7 +39,13 @@ function setButtonStyle(selectedButton, buttons) {
 		-- Remember you can pass in a function to fadeIn/fadeOut. Use it to set attributes during transition.
 */
 function moveImageIntoFrame(button) {
-	console.log('here');
+    var buttImg = button.data('imageKey');
+    //img-item
+    var image = $('.img-item');
+    image.fadeOut(500, function() {
+        image.attr('src', buttImg.src); // after fade out is finished
+        image.fadeIn(500);
+    });
 }
 
 
@@ -44,7 +53,8 @@ function moveImageIntoFrame(button) {
 // 'Active' button has 'btn-danger' instead.
 function generateButtons() {
 	var idx;
-	var button; var buttonStyle;
+	var button;
+    var buttonStyle;
 	var field = $('#controls');	// Grab the element to append buttons to.
 	var textValue;
 
